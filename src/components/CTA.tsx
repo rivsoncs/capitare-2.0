@@ -52,9 +52,9 @@ export const CTA: React.FC = () => {
             viewport={{ once: true, margin: '-100px' }}
           >
             <img
-              src="/fulllogo_transparent_nobuffer.png"
+              src="/IconOnly_NoBuffer.png"
               alt="Capitare Logo"
-              className="h-24 w-auto"
+              className="h-16 w-16"
             />
           </motion.div>
 

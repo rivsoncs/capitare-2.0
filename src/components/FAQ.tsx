@@ -81,9 +81,9 @@ export const FAQ: React.FC = () => {
             viewport={{ once: true, margin: '-100px' }}
           >
             <img
-              src="/logo_light.png"
+              src="/IconOnly_NoBuffer.png"
               alt="Capitare Logo"
-              className="h-20 w-auto"
+              className="h-12 w-12"
             />
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
