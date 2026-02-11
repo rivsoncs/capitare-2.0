@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { AnimatedLogo } from './AnimatedLogo';
 
 const faqs = [
   {
@@ -73,6 +74,15 @@ export const FAQ: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: '-100px' }}
         >
+          <motion.div
+            className="flex justify-center mb-8"
+            initial={{ y: -20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <AnimatedLogo size="lg" variant="gradient" animated={true} />
+          </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-brand-primary">Dúvidas</span>{' '}
             <span className="gradient-text">Frequentes</span>

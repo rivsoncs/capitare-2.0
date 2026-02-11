@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from './Button';
+import { AnimatedLogo } from './AnimatedLogo';
 
 export const CTA: React.FC = () => {
   return (
@@ -34,13 +35,24 @@ export const CTA: React.FC = () => {
         >
           {/* Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full mb-8"
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.15)' }}
           >
             <Sparkles className="w-4 h-4 text-brand-accent" />
             <span className="text-sm font-medium text-white">
               Junte-se aos líderes de mercado
             </span>
+          </motion.div>
+
+          {/* Animated Logo - Centered and Large */}
+          <motion.div
+            className="flex justify-center mb-12"
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, type: 'spring', stiffness: 100 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <AnimatedLogo size="xl" variant="light" animated={true} />
           </motion.div>
 
           {/* Main Content */}

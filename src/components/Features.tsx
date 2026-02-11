@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Zap, TrendingUp, Shield, Clock, BarChart3, Code2, Smartphone } from 'lucide-react';
+import { AnimatedLogo } from './AnimatedLogo';
 
 const features = [
   {
@@ -88,6 +89,15 @@ export const Features: React.FC = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: '-100px' }}
         >
+          <motion.div
+            className="flex justify-center mb-8"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            <AnimatedLogo size="lg" variant="gradient" animated={true} />
+          </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-brand-primary">Soluções</span>{' '}
             <span className="gradient-text">Completas e Integradas</span>
