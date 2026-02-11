@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from './Button';
 
 const navLinks = [
-  { label: 'Como Funciona', href: '#como-funciona' },
-  { label: 'Produtos', href: '#produtos' },
-  { label: 'Mercados', href: '#mercados' },
-  { label: 'Cases', href: '#cases' },
-  { label: 'Recursos', href: '#recursos' },
+  { label: 'Soluções', href: '#solutions' },
+  { label: 'Como Funciona', href: '#how-it-works' },
+  { label: 'Casos de Uso', href: '#cases' },
+  { label: 'Recursos', href: '#resources' },
+  { label: 'Documentação', href: '#docs' },
 ];
 
 export const Header: React.FC = () => {
@@ -22,77 +23,152 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-200/50'
-          : 'bg-transparent'
+          ? 'bg-white/70 backdrop-blur-2xl shadow-glass border-b border-white/20'
+          : 'bg-transparent backdrop-blur-none'
       }`}
     >
       <div className="section-container">
         <nav className="flex items-center justify-between h-20">
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-brand-primary to-brand-accent rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-xl">C</span>
+          {/* Logo */}
+          <motion.a
+            href="#"
+            className="flex items-center gap-3 group"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple shadow-glow group-hover:shadow-glow-lg transition-all duration-300 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+              <img
+                src="/capitare_icon.svg"
+                alt="Capitare"
+                className="w-7 h-7 relative z-10"
+              />
             </div>
-            <span className="font-bold text-xl text-brand-primary">Capitare</span>
-          </a>
+            <div className="flex flex-col">
+              <span className="font-bold text-lg bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent">
+                Capitare
+              </span>
+              <span className="text-xs text-gray-500 font-medium">Mercado de Capitais</span>
+            </div>
+          </motion.a>
 
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation */}
+          <motion.div
+            className="hidden lg:flex items-center gap-1"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {navLinks.map((link) => (
-              <a
+              <motion.a
                 key={link.label}
                 href={link.href}
-                className="text-gray-600 hover:text-brand-primary transition-colors font-medium"
+                variants={itemVariants}
+                className="gradient-underline px-4 py-2 text-sm font-medium text-gray-700 hover:text-brand-primary transition-colors duration-300"
               >
                 {link.label}
-              </a>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <Button variant="outline" size="sm">
+          {/* Desktop CTA */}
+          <motion.div
+            className="hidden lg:flex items-center gap-3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <button className="px-4 py-2 text-sm font-medium text-brand-primary hover:bg-brand-primary/5 rounded-lg transition-colors duration-300">
               Entrar
-            </Button>
+            </button>
             <Button size="sm" icon>
               Agendar Demo
+              <ArrowRight className="w-4 h-4" />
             </Button>
-          </div>
+          </motion.div>
 
-          <button
-            className="lg:hidden p-2 text-gray-600 hover:text-brand-primary"
+          {/* Mobile Menu Button */}
+          <motion.button
+            className="lg:hidden p-2 text-brand-primary hover:bg-gray-100 rounded-lg transition-colors duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            whileTap={{ scale: 0.95 }}
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          </motion.button>
         </nav>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-b border-gray-200 py-4">
-            <div className="section-container flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-gray-600 hover:text-brand-primary transition-colors font-medium py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="flex flex-col gap-3 pt-4 border-t border-gray-200">
-                <Button variant="outline" size="md">
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={isMobileMenuOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="lg:hidden overflow-hidden"
+        >
+          <div className="absolute top-full left-0 right-0 bg-white/80 backdrop-blur-xl border-b border-white/20 shadow-glass">
+            <div className="section-container py-6 flex flex-col gap-4">
+              <motion.div
+                className="flex flex-col gap-2"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {navLinks.map((link) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    variants={itemVariants}
+                    className="px-4 py-2 text-gray-700 hover:text-brand-primary hover:bg-brand-primary/5 rounded-lg transition-colors duration-300 font-medium"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </motion.div>
+
+              <div className="divider-line my-2" />
+
+              <motion.div
+                className="flex flex-col gap-3"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <button className="px-4 py-2 text-sm font-medium text-brand-primary border-2 border-brand-accent rounded-lg hover:bg-brand-accent/10 transition-colors duration-300">
                   Entrar
-                </Button>
+                </button>
                 <Button size="md" icon>
                   Agendar Demo
+                  <ArrowRight className="w-4 h-4" />
                 </Button>
-              </div>
+              </motion.div>
             </div>
           </div>
-        )}
+        </motion.div>
       </div>
     </header>
   );

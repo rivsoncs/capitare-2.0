@@ -1,5 +1,6 @@
 import React from 'react';
-import { Linkedin, Twitter, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Linkedin, Twitter, Github, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
 
 const footerLinks = {
   solucoes: [
@@ -9,16 +10,16 @@ const footerLinks = {
     { label: 'Compliance', href: '#' },
   ],
   mercados: [
-    { label: 'Indústria', href: '#' },
-    { label: 'Agronegócio', href: '#' },
     { label: 'Real Estate', href: '#' },
     { label: 'Energia', href: '#' },
+    { label: 'Infraestrutura', href: '#' },
+    { label: 'Indústria', href: '#' },
   ],
   recursos: [
     { label: 'Documentação', href: '#' },
     { label: 'API Reference', href: '#' },
     { label: 'Blog', href: '#' },
-    { label: 'Webinars', href: '#' },
+    { label: 'Roadmap', href: '#' },
   ],
   empresa: [
     { label: 'Sobre nós', href: '#' },
@@ -31,128 +32,173 @@ const footerLinks = {
 const socialLinks = [
   { icon: Linkedin, href: '#', label: 'LinkedIn' },
   { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
+  { icon: Github, href: '#', label: 'GitHub' },
 ];
 
 export const Footer: React.FC = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
-    <footer className="bg-brand-primary text-white">
-      <div className="section-container section-padding">
-        <div className="grid lg:grid-cols-6 gap-12">
+    <footer className="relative bg-brand-dark text-white overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-primary to-brand-dark" />
+        <motion.div
+          className="absolute top-0 right-0 w-96 h-96 gradient-blob-accent opacity-20"
+          animate={{ y: [0, -50, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
+      <div className="section-container section-padding relative z-10">
+        <motion.div
+          className="grid lg:grid-cols-6 gap-12 mb-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <a href="#" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-brand-accent to-brand-success rounded-xl flex items-center justify-center">
-                <span className="text-brand-primary font-bold text-xl">C</span>
+          <motion.div variants={itemVariants} className="lg:col-span-2">
+            <motion.a
+              href="#"
+              className="flex items-center gap-3 mb-6 group"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple shadow-glow group-hover:shadow-glow-lg transition-all duration-300 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+                <img
+                  src="/capitare_icon.svg"
+                  alt="Capitare"
+                  className="w-7 h-7 relative z-10 invert"
+                />
               </div>
-              <span className="font-bold text-xl">Capitare</span>
-            </a>
-            <p className="text-blue-200 mb-6 max-w-sm">
-              Infraestrutura de mercado de capitais para tokenização e securitização de ativos com total compliance regulatório.
+              <div className="flex flex-col">
+                <span className="font-bold text-lg">Capitare</span>
+                <span className="text-xs text-white/60">Mercado de Capitais</span>
+              </div>
+            </motion.a>
+
+            <p className="text-white/70 mb-6 max-w-sm leading-relaxed">
+              Infraestrutura moderna para tokenização de ativos com compliance regulatório completo e segurança de nível enterprise.
             </p>
+
+            {/* Social Links */}
             <div className="flex gap-4">
               {socialLinks.map((social) => (
-                <a
+                <motion.a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-brand-accent hover:text-brand-primary transition-colors"
+                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition-all duration-300"
                   aria-label={social.label}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
                 >
                   <social.icon className="w-5 h-5" />
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Soluções</h4>
-            <ul className="space-y-3">
-              {footerLinks.solucoes.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-blue-200 hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Link Sections */}
+          {[
+            { title: 'Soluções', links: footerLinks.solucoes },
+            { title: 'Mercados', links: footerLinks.mercados },
+            { title: 'Recursos', links: footerLinks.recursos },
+            { title: 'Empresa', links: footerLinks.empresa },
+          ].map((section, idx) => (
+            <motion.div key={section.title} variants={itemVariants}>
+              <h4 className="font-semibold mb-6 text-white">{section.title}</h4>
+              <ul className="space-y-3">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <motion.a
+                      href={link.href}
+                      className="text-white/60 hover:text-white group flex items-center gap-2 transition-colors duration-300"
+                      whileHover={{ x: 4 }}
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </motion.a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Mercados</h4>
-            <ul className="space-y-3">
-              {footerLinks.mercados.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-blue-200 hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Divider */}
+        <motion.div
+          className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          viewport={{ once: true }}
+        />
 
-          <div>
-            <h4 className="font-semibold mb-4">Recursos</h4>
-            <ul className="space-y-3">
-              {footerLinks.recursos.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-blue-200 hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Contact & Copyright */}
+        <motion.div
+          className="grid md:grid-cols-2 gap-8 mb-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={itemVariants} className="flex flex-col md:flex-row gap-6">
+            <a
+              href="mailto:contato@capitare.com"
+              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              <span className="text-sm">contato@capitare.com</span>
+            </a>
+            <a
+              href="tel:+551140004500"
+              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              <span className="text-sm">+55 11 4000-4500</span>
+            </a>
+            <span className="flex items-center gap-2 text-white/60">
+              <MapPin className="w-4 h-4" />
+              <span className="text-sm">São Paulo, SP</span>
+            </span>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Empresa</h4>
-            <ul className="space-y-3">
-              {footerLinks.empresa.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-blue-200 hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Contact Info */}
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="flex flex-col md:flex-row gap-6">
-              <a href="mailto:contato@capitare.com" className="flex items-center gap-2 text-blue-200 hover:text-white transition-colors">
-                <Mail className="w-4 h-4" />
-                contato@capitare.com
-              </a>
-              <a href="tel:+551140004500" className="flex items-center gap-2 text-blue-200 hover:text-white transition-colors">
-                <Phone className="w-4 h-4" />
-                +55 11 4000-4500
-              </a>
-              <span className="flex items-center gap-2 text-blue-200">
-                <MapPin className="w-4 h-4" />
-                São Paulo, SP - Brasil
-              </span>
-            </div>
-            <p className="text-blue-200 text-sm">
-              © 2024 Capitare. Todos os direitos reservados.
-            </p>
-          </div>
-        </div>
+          <motion.p variants={itemVariants} className="text-white/60 text-sm text-right">
+            © 2024 Capitare. Todos os direitos reservados.
+          </motion.p>
+        </motion.div>
 
         {/* Disclaimer */}
-        <div className="mt-8 pt-8 border-t border-white/10">
-          <p className="text-blue-300 text-xs leading-relaxed">
-            <strong>Disclaimer Regulatório:</strong> A Capitare Tecnologia em Mercado de Capitais Ltda.
-            atua como facilitadora de operações de tokenização e securitização de ativos,
-            estando em processo de registro perante a CVM. As operações de oferta pública
-            são estruturadas em conformidade com as Instruções CVM 88, 400 e demais normas aplicáveis.
-            Investimentos em valores mobiliários possuem riscos e podem resultar em perdas patrimoniais.
-            Consulte um profissional habilitado antes de investir. Past performance is not indicative of future results.
+        <motion.div
+          className="pt-8 border-t border-white/10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-white/50 text-xs leading-relaxed">
+            <strong>Disclaimer Regulatório:</strong> A Capitare Tecnologia em Mercado de Capitais Ltda. atua como facilitadora de operações de tokenização e securitização de ativos, estando em processo de registro perante a CVM. As operações de oferta pública são estruturadas em conformidade com as Instruções CVM 88, 400 e demais normas aplicáveis. Investimentos em valores mobiliários possuem riscos e podem resultar em perdas patrimoniais. Consulte um profissional habilitado antes de investir.
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
