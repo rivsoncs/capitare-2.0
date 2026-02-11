@@ -62,9 +62,9 @@ export const Header: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <img
-              src="/fulllogo_transparent_nobuffer.png"
+              src="/IconOnly_NoBuffer.png"
               alt="Capitare"
-              className="h-8 w-auto"
+              className="h-8 w-8"
             />
           </motion.a>
 

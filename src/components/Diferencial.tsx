@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
-import { AnimatedLogo } from './AnimatedLogo';
 
 const comparison = [
   {
@@ -85,7 +84,11 @@ export const Diferencial: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true, margin: '-100px' }}
           >
-            <AnimatedLogo size="lg" variant="gradient" animated={true} />
+            <img
+              src="/IconOnly_NoBuffer.png"
+              alt="Capitare Logo"
+              className="h-12 w-12"
+            />
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-brand-primary">Por que</span>{' '}

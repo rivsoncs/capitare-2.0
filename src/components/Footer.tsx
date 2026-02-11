@@ -84,9 +84,9 @@ export const Footer: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             >
               <img
-                src="/fulllogo_transparent_nobuffer.png"
+                src="/IconOnly_NoBuffer.png"
                 alt="Capitare"
-                className="h-8 w-auto"
+                className="h-8 w-8"
               />
             </motion.a>
 

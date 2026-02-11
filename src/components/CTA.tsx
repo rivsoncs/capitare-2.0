@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from './Button';
-import { AnimatedLogo } from './AnimatedLogo';
 
 export const CTA: React.FC = () => {
   return (
@@ -44,7 +43,7 @@ export const CTA: React.FC = () => {
             </span>
           </motion.div>
 
-          {/* Animated Logo - Centered and Large */}
+          {/* Logo - Centered and Large */}
           <motion.div
             className="flex justify-center mb-12"
             initial={{ scale: 0, opacity: 0 }}
@@ -52,7 +51,11 @@ export const CTA: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2, type: 'spring', stiffness: 100 }}
             viewport={{ once: true, margin: '-100px' }}
           >
-            <AnimatedLogo size="xl" variant="light" animated={true} />
+            <img
+              src="/IconOnly_NoBuffer.png"
+              alt="Capitare Logo"
+              className="h-16 w-16"
+            />
           </motion.div>
 
           {/* Main Content */}
