@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Header } from '../components/Header';
+import { Hero } from '../components/Hero';
+import { Products } from '../components/Products';
+import { Cases } from '../components/Cases';
+import { Footer } from '../components/Footer';
+import '../styles/global.css';
+---
+
+<Layout title="Capitare - Infraestrutura de Mercado de Capitais">
+  <Header client:load />
+  <main>
+    <Hero client:visible />
+    <Products client:visible />
+    <Cases client:visible />
+  </main>
+  <Footer />
+</Layout>
