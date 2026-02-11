@@ -80,21 +80,14 @@ export const Footer: React.FC = () => {
           <motion.div variants={itemVariants} className="lg:col-span-2">
             <motion.a
               href="#"
-              className="flex items-center gap-3 mb-6 group"
+              className="flex items-center gap-2 mb-6 group"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple shadow-glow group-hover:shadow-glow-lg transition-all duration-300 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
-                <img
-                  src="/capitare_icon.svg"
-                  alt="Capitare"
-                  className="w-7 h-7 relative z-10 invert"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg">Capitare</span>
-                <span className="text-xs text-white/60">Mercado de Capitais</span>
-              </div>
+              <img
+                src="/fulllogo_transparent_nobuffer.png"
+                alt="Capitare"
+                className="h-8 w-auto"
+              />
             </motion.a>
 
             <p className="text-white/70 mb-6 max-w-sm leading-relaxed">

@@ -56,25 +56,16 @@ export const Header: React.FC = () => {
           {/* Logo */}
           <motion.a
             href="#"
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2 group"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple shadow-glow group-hover:shadow-glow-lg transition-all duration-300 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-brand-accent via-brand-indigo to-brand-purple opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
-              <img
-                src="/capitare_icon.svg"
-                alt="Capitare"
-                className="w-7 h-7 relative z-10"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent">
-                Capitare
-              </span>
-              <span className="text-xs text-gray-500 font-medium">Mercado de Capitais</span>
-            </div>
+            <img
+              src="/fulllogo_transparent_nobuffer.png"
+              alt="Capitare"
+              className="h-8 w-auto"
+            />
           </motion.a>
 
           {/* Desktop Navigation */}
