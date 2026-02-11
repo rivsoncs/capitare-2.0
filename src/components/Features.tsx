@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Zap, TrendingUp, Shield, Clock, BarChart3, Code2, Smartphone } from 'lucide-react';
-import { AnimatedLogo } from './AnimatedLogo';
 
 const features = [
   {
@@ -96,7 +95,11 @@ export const Features: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true, margin: '-100px' }}
           >
-            <AnimatedLogo size="lg" variant="gradient" animated={true} />
+            <img
+              src="/logo_light.png"
+              alt="Capitare Logo"
+              className="h-20 w-auto"
+            />
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="text-brand-primary">Soluções</span>{' '}
